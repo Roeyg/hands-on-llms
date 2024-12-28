@@ -11,7 +11,7 @@ This dataset should resemble as much as possible the actual questions, and answe
 
 ## Quick set up
 
-* Set up virtual env using Poetry (if you get an error message that poetry.lock is out of date, run `poetry lock --no-update` and then re-run):
+* Set up virtual env using Poetry
     ```
     $ make init
     ```
@@ -32,7 +32,7 @@ This dataset should resemble as much as possible the actual questions, and answe
     ```
     $ make training-data
     ```
-**Note:** If not working due to the error message: "libcudnn.so.8: cannot open shared object file: No such file or directory", try to copy all the "nvidia" prefixed libraries from the training pipeline poetry folder (in the /lib/python3.10/site-packages/ sub-folder), to the same subfolder in this module poetry folder (in the exact same subfolder). The poetry folder can be found by running from the referenced pipeline's folder the following command:
+**Note:** If not working due to the error message: "libcudnn.so.8: cannot open shared object file: No such file or directory", try to copy all the "nvidia" prefixed libraries from the training pipeline poetry folder, which can be found by running from the trining pipeline folder the following command:
     ```
     $ poetry env list --full-path
     ``` 
@@ -51,10 +51,6 @@ or the vector db.
     ```
     $ make embed
     ```
-**Note:** If not working due to the error message: "libcudnn.so.8: cannot open shared object file: No such file or directory", try to copy all the "nvidia" prefixed libraries from the training pipeline poetry folder, which can be found by running from the trining pipeline folder the following command:
-    ```
-    $ poetry env list --full-path
-    ``` 
 
 ## References
 > **A bit more about prompt engineering**

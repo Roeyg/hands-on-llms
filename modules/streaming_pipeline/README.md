@@ -42,8 +42,8 @@ The role of this streaming pipeline is to listen 24/7 to available financial new
 ## 2.1. Dependencies
 
 Main dependencies you have to install yourself:
-* Python 3.10 (add 'sudo' to the commands in: https://zomro.com/blog/faq/299-kak-ustanovit-python-310-na-ubuntu-2004 ; If you get the error: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem, do so and re-run)
-* Poetry 1.5.1 (1.8.4 also works, follow the instructions in: https://python-poetry.org/docs/#installing-with-the-official-installer )
+* Python 3.10
+* Poetry 1.5.1
 * GNU Make 4.3
 * AWS CLI 2.11.22
 
