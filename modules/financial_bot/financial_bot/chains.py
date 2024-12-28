@@ -155,6 +155,22 @@ class ContextExtractorChain(Chain):
         return question
 
 
+from pathlib import Path
+from box import Box
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+class Prompt():
+    def __init__(self):
+        self.path = PROJECT_ROOT / Path("modules/financial_bot/financial_bot/prompts.yaml")
+        self.prompts = Box.from_yaml(filename=self.path)
+    
+    def get(key):
+        return self.prompts[key]
+            
+
+
+
 class FinancialBotQAChain(Chain):
     """This custom chain handles LLM generation upon given prompt"""
 
@@ -233,19 +249,8 @@ class FinancialBotQAChain(Chain):
 class ChatGPTChain(Chain):
     """A custom chain to interact with ChatGPT."""
 
-    # input_key = "question"  # Define the input key for the chain
-    # output_key = "chatgpt_response"  # Define the output key for the chain
-
     api_key: str
     model: str
-
-    # def __init__(self,  model: str = "gpt-4o-mini",api_key: str|None = None):
-        
-    #     super().__init__()
-    #     if api_key is None:
-    #         api_key = os.getenv("OPENAI_API_KEY")
-    #     self.api_key = api_key
-    #     self.model = model
 
     def _call(self, inputs: dict) -> dict:
         """
@@ -266,11 +271,13 @@ class ChatGPTChain(Chain):
         import os
         openai.api_key = self.api_key
         question = inputs[self.input_keys[0]]
-        
+        prompts = Prompt()
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
             model=self.model,
-            messages=[{"role": "user", "content": f"Optimize this question according to prompt engineering guide lines: {question}"}],
+            messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: 
+                       {prompts.get(inputs[self.input_keys[1]])}. Return only the modified prompt without preambles."},
+                {"role": "user", "content": f"{question}"}],
         )
         
         response_c = response.choices[0].message.content
@@ -280,7 +287,7 @@ class ChatGPTChain(Chain):
 
     @property
     def input_keys(self) -> List[str]:
-        return ["question"]
+        return ["question", "prompt_method"]
 
     @property
     def output_keys(self) -> List[str]:

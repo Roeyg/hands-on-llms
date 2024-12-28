@@ -220,6 +220,7 @@ def _run(**inputs):
 
     bot = inputs["context"]
     input_payload = {
+        "prompt_method": inputs["prompt_method"],   
         "about_me": inputs["about_me"],
         "question": inputs["question"],
         "to_load_history": inputs["history"] if "history" in inputs else [],

@@ -253,6 +253,7 @@ class FinancialBot:
         self,
         about_me: str,
         question: str,
+        prompt_method: str,
         to_load_history: List[Tuple[str, str]] = None,
     ) -> str:
         """
@@ -273,6 +274,7 @@ class FinancialBot:
         """
 
         inputs = {
+            "prompt_method": prompt_method, 
             "about_me": about_me,
             "question": question,
             "to_load_history": to_load_history if to_load_history else [],

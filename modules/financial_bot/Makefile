@@ -30,6 +30,7 @@ run:
 		--question "Should I invest in Jasper Therapeutics?" \
 		--history "[[\"What is your opinion on investing in startup companies?\", \"Startup investments can be very lucrative, but they also come with a high degree of risk. It is important to do your due diligence and research the company thoroughly before investing.\"]]" \
 		--debug False
+		--prompt_method "instruction-based"
 
 run_dev:
 	@echo "Running financial_bot [Dev Mode]..."

@@ -1,0 +1,56 @@
+instruction-based: |
+  Rewrite this prompt to make it more direct and self-contained so the model can answer accurately without additional context.
+
+few-shot-prompting: |
+  Transform this prompt into a few-shot prompt by adding 2-3 clear input-output examples. Ensure the examples closely match the desired output.
+
+chain-of-thought-prompting: |
+  Enhance this prompt to encourage chain-of-thought reasoning. Instruct the model to explain each step of its reasoning before giving the final answer.
+
+self-consistency: |
+  Modify this prompt to request multiple reasoning paths or solutions, then have the model choose the most plausible answer from them.
+
+role-playing-or-persona: |
+  Rewrite this prompt to assign a specific role or persona to the LLM, such as “You are a financial advisor.” Make sure the tone and vocabulary match the persona.
+
+context-enhancement: |
+  Add relevant background information or contextual details to this prompt so the model fully understands the scenario. Include any necessary references or constraints.
+
+formatting-and-structure: |
+  Specify the desired output format clearly (e.g., bullet points, headings, numbered lists). If needed, include a brief example of the format.
+
+iterative-refinement: |
+  Rewrite this prompt to allow for follow-up instructions or revisions. Encourage the user to ask for further clarification or improvements after the initial response.
+
+prompt-chaining: |
+  Break this complex task into a sequence of smaller steps. Create multiple sub-prompts where the output of one step serves as the input to the next.
+
+error-detection: |
+  Analyze this prompt for potential ambiguity or errors. Suggest revisions to minimize misunderstandings and improve clarity.
+
+tone-and-style-adjustment: |
+  Rewrite this prompt to ensure the response aligns with the desired tone (e.g., formal, casual, persuasive). Make the tone explicit in the instructions.
+
+domain-specific-expertise: |
+  Adapt this prompt to a specific domain (e.g., legal, medical, technical). Adjust the vocabulary and context accordingly to reflect domain knowledge.
+
+length-and-depth: |
+  Optimize this prompt to specify the desired length and level of detail for the response (e.g., a brief summary vs. a detailed explanation).
+
+evaluation-and-feedback: |
+  Evaluate this prompt for clarity, specificity, and relevance to the desired output. Propose a scoring system and give suggestions for improvement.
+
+multi-modal: |
+  Adapt this prompt for a multi-modal response (e.g., generating an image, audio, or a video script). Clearly describe how the output should match the chosen modality.
+
+creative-ideation: |
+  Rewrite this prompt to maximize creativity. Instruct the model to explore novel or unconventional ideas before converging on a final concept.
+
+problem-solving: |
+  Adjust this prompt to guide the model through a problem-solving framework. Instruct it to analyze the problem, propose multiple solutions, and recommend the best approach.
+
+data-extraction: |
+  Optimize this prompt to extract structured data from unstructured text. Instruct the model to organize its output in a clear table or JSON format.
+
+comparative-analysis: |
+  Rewrite this prompt to include instructions for comparing two or more options. Specify the criteria for comparison and how to present the findings.
