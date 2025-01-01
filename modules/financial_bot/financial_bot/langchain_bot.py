@@ -140,7 +140,7 @@ class FinancialBot:
                 k=3,
             ),
             chains=[chatgpt_chain, context_retrieval_chain, llm_generator_chain],
-            input_variables=["about_me", "question", "to_load_history"],
+            input_variables=["about_me", "question", "to_load_history","prompt_method"],
             output_variables=["answer"],
             verbose=True,
         )

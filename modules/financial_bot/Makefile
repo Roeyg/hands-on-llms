@@ -29,8 +29,15 @@ run:
 		--about_me "I am a student and I have some money that I want to invest." \
 		--question "Should I invest in Jasper Therapeutics?" \
 		--history "[[\"What is your opinion on investing in startup companies?\", \"Startup investments can be very lucrative, but they also come with a high degree of risk. It is important to do your due diligence and research the company thoroughly before investing.\"]]" \
-		--debug False
 		--prompt_method "instruction-based"
+		--debug False
+		
+	
+run_temp:
+	@echo "Running financial_bot..."
+
+	poetry run python -m play 
+		
 
 run_dev:
 	@echo "Running financial_bot [Dev Mode]..."

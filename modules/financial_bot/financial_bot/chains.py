@@ -156,16 +156,17 @@ class ContextExtractorChain(Chain):
 
 
 from pathlib import Path
-from box import Box
-
+import yaml
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 class Prompt():
     def __init__(self):
         self.path = PROJECT_ROOT / Path("modules/financial_bot/financial_bot/prompts.yaml")
-        self.prompts = Box.from_yaml(filename=self.path)
+        with open(self.path,'r') as f:
+            self.prompts = yaml.load(f)
+            
     
-    def get(key):
+    def get(self, key):
         return self.prompts[key]
             
 
@@ -275,8 +276,7 @@ class ChatGPTChain(Chain):
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
             model=self.model,
-            messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: 
-                       {prompts.get(inputs[self.input_keys[1]])}. Return only the modified prompt without preambles."},
+            messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: {prompts.get(inputs[self.input_keys[1]])}. Return only the modified prompt without preambles."},
                 {"role": "user", "content": f"{question}"}],
         )
         

@@ -162,6 +162,7 @@ def run_dev(**inputs):
 def run_local(
     about_me: str,
     question: str,
+    prompt_method: str,
     history: List[Tuple[str, str]] = None,
     debug: bool = False,
 ):
@@ -188,6 +189,7 @@ def run_local(
         "about_me": about_me,
         "question": question,
         "history": history,
+        "prompt_method": prompt_method,
         "context": bot,
     }
 
