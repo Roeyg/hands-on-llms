@@ -1,5 +1,6 @@
 import time
 from typing import Any, Dict, List, Optional
+import openai
 
 import qdrant_client
 from langchain import chains
@@ -161,9 +162,9 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 class Prompt():
     def __init__(self):
-        self.path = PROJECT_ROOT / Path("modules/financial_bot/financial_bot/prompts.yaml")
+        self.path = PROJECT_ROOT / Path("financial_bot/financial_bot/prompts.yaml")
         with open(self.path,'r') as f:
-            self.prompts = yaml.load(f)
+            self.prompts = yaml.safe_load(f)
             
     
     def get(self, key):
@@ -198,6 +199,7 @@ class FinancialBotQAChain(Chain):
         """Calls the chain with the given inputs and returns the output"""
 
         inputs = self.clean(inputs)
+
         prompt = self.template.format_infer(
             {
                 "user_context": inputs["about_me"],
@@ -235,8 +237,11 @@ class FinancialBotQAChain(Chain):
         """Cleans the inputs by removing extra whitespace and grouping broken paragraphs"""
 
         for key, input in inputs.items():
-            cleaned_input = clean_extra_whitespace(input)
-            cleaned_input = group_broken_paragraphs(cleaned_input)
+            if input is not None:
+                cleaned_input = clean_extra_whitespace(input)
+                cleaned_input = group_broken_paragraphs(cleaned_input)
+            else:
+                cleaned_input = None
 
             inputs[key] = cleaned_input
 
@@ -267,21 +272,25 @@ class ChatGPTChain(Chain):
         dict
             The output dictionary containing the ChatGPT response.
         """
-        import openai
-        from openai import OpenAI
-        import os
-        openai.api_key = self.api_key
         question = inputs[self.input_keys[0]]
-        prompts = Prompt()
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        response = client.chat.completions.create(
-            model=self.model,
-            messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: {prompts.get(inputs[self.input_keys[1]])}. Return only the modified prompt without preambles."},
-                {"role": "user", "content": f"{question}"}],
-        )
+        if inputs[self.input_keys[1]] is None:
+            print(f"####################################################################       did not optimize response! returning original question: {question} #########################################################")
+            response_c = question
         
-        response_c = response.choices[0].message.content
-        print(f"####################################################################       chatgpt response: {response_c}")
+        else:
+            openai.api_key = self.api_key
+            prompts = Prompt()
+            chat_completion = openai.ChatCompletion.create(model="gpt-4o-mini", messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs. optimize prompts according to the given instructions. Return only the optimized prompt without preambles."},
+                    {"role": "user", "content": prompts.get(inputs[self.input_keys[1]]).format(question=question)}])
+            # response = client.chat.completions.create(
+            #     model=self.model,
+            #     messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: {prompts.get(inputs[self.input_keys[1]])}. Return only the modified prompt without preambles."},
+            #         {"role": "user", "content": f"{question}"}],
+            # )
+            
+            response_c = chat_completion.choices[0].message.content
+            print(f"####################################################################       chatgpt response: {response_c}")
+        print(f"type of question: {type(question)}, type of gpt answer: {type(response_c)}")
         return {"chatgpt_response": response_c}
         # return {"chatgpt_response": "Should i invest in stocks?"}
 
@@ -293,3 +302,18 @@ class ChatGPTChain(Chain):
     def output_keys(self) -> List[str]:
         return ["chatgpt_response"]
 
+def test_chat_gpt():
+    import openai
+    openai.api_key = "sk.."
+
+    prompts = Prompt()
+
+    # create a chat completion
+    chat_completion = openai.ChatCompletion.create(model="gpt-4o-mini", messages=[{"role": "developer", "content": f"You are in charge of prompt engineering for LLMs, you will get a prompt that might be poorly optimized.optimize it according to the following direction: {prompts.get('chain-of-thought-prompting')}. Return only the modified prompt without preambles."},
+                {"role": "user", "content": f"should I invest in tesla?"}])
+
+    # print the chat completion
+    print(chat_completion.choices[0].message.content)
+
+if __name__ == "__main__":
+    test_chat_gpt()

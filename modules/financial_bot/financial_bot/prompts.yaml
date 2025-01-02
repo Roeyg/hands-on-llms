@@ -1,56 +1,26 @@
-instruction-based: |
-  Rewrite this prompt to make it more direct and self-contained so the model can answer accurately without additional context.
+explicit_reasoning:
+  "Analyze the following user query about financial investments: '{question}'. Rewrite it to explicitly request step-by-step explanations and reasoning for any recommendations or calculations."
 
-few-shot-prompting: |
-  Transform this prompt into a few-shot prompt by adding 2-3 clear input-output examples. Ensure the examples closely match the desired output.
+specific_and_structured_prompts:
+  "Restructure the following financial query: '{question}'. Make it more specific by including relevant parameters such as investment amount, time horizon, risk tolerance, and desired outcomes."
 
-chain-of-thought-prompting: |
-  Enhance this prompt to encourage chain-of-thought reasoning. Instruct the model to explain each step of its reasoning before giving the final answer.
+chain_of_thought:
+  "Break down this financial question into a series of smaller, more focused queries: '{question}'. Provide 3-5 sequential questions that will lead to a comprehensive answer."
 
-self-consistency: |
-  Modify this prompt to request multiple reasoning paths or solutions, then have the model choose the most plausible answer from them.
+context_provision:
+  "Enhance the following investment query with relevant context: '{question}'. Add information about current market conditions, economic factors, or typical investor profiles that would be beneficial for generating a more accurate response."
 
-role-playing-or-persona: |
-  Rewrite this prompt to assign a specific role or persona to the LLM, such as “You are a financial advisor.” Make sure the tone and vocabulary match the persona.
+meta_cognition:
+  "Reframe this financial question to encourage reflection on decision-making processes and potential biases: '{question}'. Include a request for confidence levels and identification of limitations in the analysis."
 
-context-enhancement: |
-  Add relevant background information or contextual details to this prompt so the model fully understands the scenario. Include any necessary references or constraints.
+few_shot_learning:
+  "Here are two examples of well-structured financial queries:
+  1. 'What is the expected return on a $50,000 investment in a diversified stock portfolio over 10 years, assuming an average annual growth rate of 7%? Please show the calculation.'
+  2. 'Compare the risk-return profiles of government bonds vs. corporate bonds for a conservative investor nearing retirement.'
+  Using these as models, rewrite the following query in a similar style: '{question}'"
 
-formatting-and-structure: |
-  Specify the desired output format clearly (e.g., bullet points, headings, numbered lists). If needed, include a brief example of the format.
+role_prompting:
+  "Assume the role of a financial advisor with 20 years of experience. Rewrite the following query to ask for expert-level insights and recommendations: '{question}'"
 
-iterative-refinement: |
-  Rewrite this prompt to allow for follow-up instructions or revisions. Encourage the user to ask for further clarification or improvements after the initial response.
-
-prompt-chaining: |
-  Break this complex task into a sequence of smaller steps. Create multiple sub-prompts where the output of one step serves as the input to the next.
-
-error-detection: |
-  Analyze this prompt for potential ambiguity or errors. Suggest revisions to minimize misunderstandings and improve clarity.
-
-tone-and-style-adjustment: |
-  Rewrite this prompt to ensure the response aligns with the desired tone (e.g., formal, casual, persuasive). Make the tone explicit in the instructions.
-
-domain-specific-expertise: |
-  Adapt this prompt to a specific domain (e.g., legal, medical, technical). Adjust the vocabulary and context accordingly to reflect domain knowledge.
-
-length-and-depth: |
-  Optimize this prompt to specify the desired length and level of detail for the response (e.g., a brief summary vs. a detailed explanation).
-
-evaluation-and-feedback: |
-  Evaluate this prompt for clarity, specificity, and relevance to the desired output. Propose a scoring system and give suggestions for improvement.
-
-multi-modal: |
-  Adapt this prompt for a multi-modal response (e.g., generating an image, audio, or a video script). Clearly describe how the output should match the chosen modality.
-
-creative-ideation: |
-  Rewrite this prompt to maximize creativity. Instruct the model to explore novel or unconventional ideas before converging on a final concept.
-
-problem-solving: |
-  Adjust this prompt to guide the model through a problem-solving framework. Instruct it to analyze the problem, propose multiple solutions, and recommend the best approach.
-
-data-extraction: |
-  Optimize this prompt to extract structured data from unstructured text. Instruct the model to organize its output in a clear table or JSON format.
-
-comparative-analysis: |
-  Rewrite this prompt to include instructions for comparing two or more options. Specify the criteria for comparison and how to present the findings.
+comparative_analysis:
+  "Modify the following investment query to request a comparison between at least two different options or strategies: '{question}'. Ensure the rewritten query asks for pros and cons of each option."
