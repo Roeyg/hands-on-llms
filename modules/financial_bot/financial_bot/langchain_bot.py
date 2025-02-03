@@ -56,6 +56,7 @@ class FinancialBot:
         streaming: bool = False,
         embedding_model_device: str = "cuda:0",
         debug: bool = False,
+        use_prompt_chat_gpt = True,
     ):
         self._llm_model_id = llm_model_id
         self._llm_qlora_model_id = llm_qlora_model_id
@@ -66,7 +67,6 @@ class FinancialBot:
         self._vector_collection_name = vector_collection_name
         self._vector_db_search_topk = vector_db_search_topk
         self._debug = debug
-
         self._qdrant_client = build_qdrant_client()
 
         self._embd_model = EmbeddingModelSingleton(

@@ -1,3 +1,10 @@
+
+no_prompt:
+  "None"
+
+explicit_reasoning2:
+  "Analyze the following user query about financial investments: '{question}'. Rewrite it to explicitly request step-by-step explanations and reasoning for any recommendations or calculations. In the rerwritten prompt, make sure to ask for sources of the provided information"
+
 explicit_reasoning:
   "Analyze the following user query about financial investments: '{question}'. Rewrite it to explicitly request step-by-step explanations and reasoning for any recommendations or calculations."
 
